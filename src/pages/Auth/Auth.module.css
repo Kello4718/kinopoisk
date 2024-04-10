@@ -1,0 +1,11 @@
+.container {
+    height: 100%;
+}
+
+.content {
+    width: min(100%, 800px);
+    height: max-content;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+}

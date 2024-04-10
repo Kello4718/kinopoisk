@@ -1,30 +1,42 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from 'react-dom/client';
 
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { store } from './app/store';
+import { Provider } from 'react-redux';
 
-import AppLayout from "./components/AppLayout/AppLayout.tsx";
-import { Detail, Home } from "./pages/index.ts";
+import AppLayout from './components/AppLayout/AppLayout.tsx';
+import { Home } from './pages/index.ts';
+import Auth from './pages/Auth/Auth.tsx';
+
+import './global/style.css';
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: '/auth',
+        element: <Auth />,
+        index: true,
+    },
+    {
+        path: '/',
         element: <AppLayout />,
         children: [
             {
-                path: "/",
+                path: '/',
                 element: <Home />,
             },
-            {
-                path: "/:id",
-                element: <Detail />,
-            },
+            // {
+            //     path: '/:id',
+            //     element: <Detail />,
+            // },
         ],
     },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-    <React.StrictMode>
+ReactDOM.createRoot(document.getElementById('root')!).render(
+    // <React.StrictMode>
+    <Provider store={store}>
         <RouterProvider router={router} />
-    </React.StrictMode>
+    </Provider>
+
+    // </React.StrictMode>
 );

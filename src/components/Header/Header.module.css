@@ -1,0 +1,18 @@
+.header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #141414;
+    padding: 20px;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+.search {
+    width: 100%;
+}
+
+.select {
+    width: 100%;
+}

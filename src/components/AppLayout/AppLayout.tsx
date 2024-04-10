@@ -1,60 +1,25 @@
-import {
-    AppBar,
-    Box,
-    Button,
-    IconButton,
-    Toolbar,
-    Typography,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from 'react-router-dom';
 
-import { useState } from "react";
+import { Flex } from 'antd';
+import { useAppSelector } from '../../app/hooks';
+import Header from '../Header/Header';
 
-const navItems = ["Home", "About", "Contact"];
+import styles from './AppLayout.module.css';
 
 const AppLayout = () => {
-    const [mobileOpen, setMobileOpen] = useState(false);
-    // console.log(mobileOpen);
-    const handleDrawerToggle = () => {
-        setMobileOpen((prevState) => !prevState);
-    };
+    const { user } = useAppSelector(({ movies }) => movies);
+
+    if (!user.login && !user.password) {
+        return <Navigate to={'/auth'} />;
+    }
 
     return (
-        <Box display={"flex"} flexDirection={"column"}>
-            <AppBar component="nav">
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: "none" } }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                            flexGrow: 1,
-                            display: { xs: "none", sm: "block" },
-                        }}
-                    >
-                        MUI
-                    </Typography>
-                    <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                        {navItems.map((item) => (
-                            <Button key={item} sx={{ color: "#fff" }}>
-                                {item}
-                            </Button>
-                        ))}
-                    </Box>
-                </Toolbar>
-            </AppBar>
-
-            <Outlet />
-        </Box>
+        <Flex vertical gap={20} className={styles.container}>
+            <Header />
+            <main className={styles.main}>
+                <Outlet />
+            </main>
+        </Flex>
     );
 };
 

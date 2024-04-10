@@ -1,0 +1,16 @@
+.container {
+    height: 100%;
+}
+
+.main {
+    width: calc(100% - 100px);
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 50px 0;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 180px 20px 20px;
+    margin: 0 auto 100px;
+}
